@@ -60,3 +60,63 @@ Examples:
 | return '\ufeff' + content; // byte order mark          | Good: use escapes for non-printable characters, and comment if necessary. |
 
 > **Tip**: Never make your code less readable simply out of fear that some programs might not handle non-ASCII characters properly. If that should happen, those programs are **broken** and they must be **fixed**.
+
+## 3 Source file structure
+
+A source file consists of, **in order**:
+
+1. License or copyright information, if present
+2. Package statement
+3. Import statements
+4. Exactly one top-level class
+
+**Exactly one blank line** separates each section that is present.
+
+### 3.1 License or copyright information, if present
+
+If license or copyright information belongs in a file, it belongs here.
+
+### 3.2 Package statement
+
+The package statement is **not line-wrapped**. The column limit (Section 4.4, [Column limit: 100](#)) does not apply to package statements.
+
+### 3.3 Import statements
+
+#### 3.3.1 No wildcard imports
+
+**Wildcard imports**, static or otherwise, **are not used**.
+
+#### 3.3.2 No line-wrapping
+
+Import statements are **not line-wrapped**. The column limit (Section 4.4, [Column limit: 100](#)) does not apply to import statements.
+
+#### 3.3.3 Ordering and spacing
+
+Imports are ordered as follows:
+
+1. All static imports in a single block.
+2. All non-static imports in a single block.
+
+If there are both static and non-static imports, a single blank line separates the two blocks. There are no other blank lines between import statements.
+
+Within each block the imported names appear in ASCII sort order. (**Note**: this is not the same as the import statements being in ASCII sort order, since '.' sorts before ';'.)
+
+#### 3.3.4 No static import for classes
+
+Static import is not used for static nested classes. They are imported with normal imports.
+
+### 3.4 Class declaration
+
+#### 3.4.1 Exactly one top-level class declaration
+
+Each top-level class resides in a source file of its own.
+
+#### 3.4.2 Ordering of class contents
+
+The order you choose for the members and initializers of your class can have a great effect on learnability. However, there's no single correct recipe for how to do it; different classes may order their contents in different ways.
+
+What is important is that each class uses **some logical order**, which its maintainer could explain if asked. For example, new methods are not just habitually added to the end of the class, as that would yield "chronological by date added" ordering, which is not a logical ordering.
+
+##### 3.4.2.1 Overloads: never split
+
+When a class has multiple constructors, or multiple methods with the same name, these appear sequentially, with no other code in between (not even private members).
