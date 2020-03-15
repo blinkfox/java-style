@@ -296,3 +296,179 @@ Beyond where required by the language or other style rules, and apart from liter
 9. Between a type annotation and `[]` or `...`.
 
 This rule is never interpreted as requiring or forbidding additional space at the start or end of a line; it addresses only interior space.
+
+#### 4.6.3 Horizontal alignment: never required
+
+**Terminology Note**: Horizontal alignment is the practice of adding a variable number of additional spaces in your code with the goal of making certain tokens appear directly below certain other tokens on previous lines.
+
+This practice is permitted, but is **never required** by Google Style. It is not even required to maintain horizontal alignment in places where it was already used.
+
+Here is an example without alignment, then using alignment:
+
+```java
+private int x; // this is fine
+private Color color; // this too
+
+private int   x;      // permitted, but future edits
+private Color color;  // may leave it unaligned
+```
+
+> **Tip**: Alignment can aid readability, but it creates problems for future maintenance. Consider a future change that needs to touch just one line. This change may leave the formerly-pleasing formatting mangled, and that is **allowed**. More often it prompts the coder (perhaps you) to adjust whitespace on nearby lines as well, possibly triggering a cascading series of reformattings. That one-line change now has a "blast radius." This can at worst result in pointless busywork, but at best it still corrupts version history information, slows down reviewers and exacerbates merge conflicts.
+
+### 4.7 Grouping parentheses: recommended
+
+Optional grouping parentheses are omitted only when author and reviewer agree that there is no reasonable chance the code will be misinterpreted without them, nor would they have made the code easier to read. It is not reasonable to assume that every reader has the entire Java operator precedence table memorized.
+
+### 4.8 Specific constructs
+
+#### 4.8.1 Enum classes
+
+After each comma that follows an enum constant, a line break is optional. Additional blank lines (usually just one) are also allowed. This is one possibility:
+
+```java
+private enum Answer {
+  YES {
+    @Override public String toString() {
+      return "yes";
+    }
+  },
+
+  NO,
+  MAYBE
+}
+```
+
+An enum class with no methods and no documentation on its constants may optionally be formatted as if it were an array initializer (see Section 4.8.3.1 on [array initializers](#)).
+
+```java
+private enum Suit { CLUBS, HEARTS, SPADES, DIAMONDS }
+```
+
+Since enum classes are classes, all other rules for formatting classes apply.
+
+#### 4.8.2 Variable declarations
+
+##### 4.8.2.1 One variable per declaration
+
+Every variable declaration (field or local) declares only one variable: declarations such as `int a, b;` are not used.
+
+**Exception**: Multiple variable declarations are acceptable in the header of a `for` loop.
+
+##### 4.8.2.2 Declared when needed
+
+Local variables are not habitually declared at the start of their containing block or block-like construct. Instead, local variables are declared close to the point they are first used (within reason), to minimize their scope. Local variable declarations typically have initializers, or are initialized immediately after declaration.
+
+#### 4.8.3 Arrays
+
+##### 4.8.3.1 Array initializers: can be "block-like"
+
+Any array initializer may optionally be formatted as if it were a "block-like construct." For example, the following are all valid (**not** an exhaustive list):
+
+```java
+new int[] {           new int[] {
+  0, 1, 2, 3            0,
+}                       1,
+                        2,
+new int[] {             3,
+  0, 1,               }
+  2, 3
+}                     new int[]
+                          {0, 1, 2, 3}
+```
+
+##### 4.8.3.2 No C-style array declarations
+
+The square brackets form a part of the type, not the variable: `String[] args`, not `String args[]`.
+
+#### 4.8.4 Switch statements
+
+**Terminology Note**: Inside the braces of a switch block are one or more statement groups. Each statement group consists of one or more switch labels (either case FOO: or default:), followed by one or more statements (or, for the last statement group, zero or more statements).
+
+##### 4.8.4.1 Indentation
+
+As with any other block, the contents of a switch block are indented +2.
+
+After a switch label, there is a line break, and the indentation level is increased +2, exactly as if a block were being opened. The following switch label returns to the previous indentation level, as if a block had been closed.
+
+##### 4.8.4.2 Fall-through: commented
+
+Within a switch block, each statement group either terminates abruptly (with a break, continue, return or thrown exception), or is marked with a comment to indicate that execution will or might continue into the next statement group. Any comment that communicates the idea of fall-through is sufficient (typically // fall through). This special comment is not required in the last statement group of the switch block. Example:
+
+```java
+switch (input) {
+  case 1:
+  case 2:
+    prepareOneOrTwo();
+    // fall through
+  case 3:
+    handleOneTwoOrThree();
+    break;
+  default:
+    handleLargeNumber(input);
+}
+```
+
+Notice that no comment is needed after case 1:, only at the end of the statement group.
+
+##### 4.8.4.3 The default case is present
+
+Each switch statement includes a `default` statement group, even if it contains no code.
+
+**Exception**: A switch statement for an `enum` type may omit the `default` statement group, if it includes explicit cases covering all possible values of that type. This enables IDEs or other static analysis tools to issue a warning if any cases were missed.
+
+#### 4.8.5 Annotations
+
+Annotations applying to a class, method or constructor appear immediately after the documentation block, and each annotation is listed on a line of its own (that is, one annotation per line). These line breaks do not constitute line-wrapping (Section 4.5, [Line-wrapping](#)), so the indentation level is not increased. Example:
+
+```java
+@Override
+@Nullable
+public String getNameIfPresent() { ... }
+```
+
+**Exception**: A single parameterless annotation may instead appear together with the first line of the signature, for example:
+
+```java
+@Override public int hashCode() { ... }
+```
+
+Annotations applying to a field also appear immediately after the documentation block, but in this case, multiple annotations (possibly parameterized) may be listed on the same line; for example:
+
+```java
+@Partial @Mock DataLoader loader;
+```
+
+There are no specific rules for formatting annotations on parameters, local variables, or types.
+
+#### 4.8.6 Comments
+
+This section addresses implementation comments. Javadoc is addressed separately in Section 7, Javadoc.
+
+Any line break may be preceded by arbitrary whitespace followed by an implementation comment. Such a comment renders the line non-blank.
+
+##### 4.8.6.1 Block comment style
+
+Block comments are indented at the same level as the surrounding code. They may be in `/* ... */` style or `// ...` style. For multi-line `/* ... */` comments, subsequent lines must start with `*` aligned with the `*` on the previous line.
+
+```java
+/*
+ * This is          // And so           /* Or you can
+ * okay.            // is this.          * even do this. */
+ */
+```
+
+Comments are not enclosed in boxes drawn with asterisks or other characters.
+
+**Tip**: When writing multi-line comments, use the `/* ... */` style if you want automatic code formatters to re-wrap the lines when necessary (paragraph-style). Most formatters don't re-wrap lines in `// ...` style comment blocks.
+
+#### 4.8.7 Modifiers
+
+Class and member modifiers, when present, appear in the order recommended by the Java Language Specification:
+
+```java
+public protected private abstract default static final transient volatile synchronized native strictfp
+```
+
+#### 4.8.8 Numeric Literals
+
+`long`-valued integer literals use an uppercase `L` suffix, never lowercase (to avoid confusion with the digit `1`). For example, `3000000000L` rather than `3000000000l`.
