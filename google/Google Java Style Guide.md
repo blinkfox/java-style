@@ -583,3 +583,54 @@ Note that the casing of the original words is almost entirely disregarded. Examp
 | "YouTube importer"  | YouTubeImporter YoutubeImporter*  | 无   |
 
 Note: Some words are ambiguously hyphenated in the English language: for example "nonempty" and "non-empty" are both correct, so the method names `checkNonempty` and `checkNonEmpty` are likewise both correct.
+
+## 6 Programming Practices
+
+### 6.1 @Override: always used
+
+A method is marked with the `@Override` annotation whenever it is legal. This includes a class method overriding a superclass method, a class method implementing an interface method, and an interface method respecifying a superinterface method.
+
+**Exception**: `@Override` may be omitted when the parent method is @Deprecated.
+
+### 6.2 Caught exceptions: not ignored
+
+Except as noted below, it is very rarely correct to do nothing in response to a caught exception. (Typical responses are to log it, or if it is considered "impossible", rethrow it as an `AssertionError`.)
+
+When it truly is appropriate to take no action whatsoever in a catch block, the reason this is justified is explained in a comment.
+
+```java
+try {
+  int i = Integer.parseInt(response);
+  return handleNumericResponse(i);
+} catch (NumberFormatException ok) {
+  // it's not numeric; that's fine, just continue
+}
+return handleTextResponse(response);
+```
+
+**Exception**: In tests, a caught exception may be ignored without comment if its name is or begins with `expected`. The following is a very common idiom for ensuring that the code under test does throw an exception of the expected type, so a comment is unnecessary here.
+
+```java
+try {
+  emptyStack.pop();
+  fail();
+} catch (NoSuchElementException expected) {
+}
+```
+
+### 6.3 Static members: qualified using class
+
+When a reference to a static class member must be qualified, it is qualified with that class's name, not with a reference or expression of that class's type.
+
+```java
+Foo aFoo = ...;
+Foo.aStaticMethod(); // good
+aFoo.aStaticMethod(); // bad
+somethingThatYieldsAFoo().aStaticMethod(); // very bad
+```
+
+### 6.4 Finalizers: not used
+
+It is **extremely rare** to override `Object.finalize`.
+
+> **Tip**: Don't do it. If you absolutely must, first read and understand [Effective Java Item 7](http://books.google.com/books?isbn=8131726592), "Avoid Finalizers," very carefully, and then don't do it.
