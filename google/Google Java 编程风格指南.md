@@ -641,3 +641,71 @@ somethingThatYieldsAFoo().aStaticMethod(); // very bad
 极少会去重写 `Object.finalize`。
 
 > **提示**：不要这么做。如果你非要使用它，请先仔细阅读和理解 [Effective Java](http://books.google.com/books?isbn=8131726592) 第 7 条：“Avoid Finalizers”，然后不要使用它。
+
+## 7 Javadoc
+
+### 7.1 格式
+
+#### 7.1.1 一般形式
+
+Javadoc 块的基本格式如下所示：
+
+```java
+/**
+ * Multiple lines of Javadoc text are written here,
+ * wrapped normally...
+ */
+public int method(String p1) { ... }
+```
+
+或者是以下单行形式：
+
+```java
+/** 一小段的 Javadoc. */
+```
+
+基本格式总是可以接受的。当整个 Javadoc 块可以放在一行时(包括注释标签)，就可以使用单行形式。请注意，这仅适用于没有 `@return` 等块标记的情况。
+
+#### 7.1.2 段落
+
+是只包含最左侧星号（`*`）的空行会出现在段落之间和 Javadoc 注解标记（`@XXX`）之前（如果有的话）。除了第一个段落，每个段落第一个单词前都有标签`<p>`，并且它和第一个单词间没有空格。
+
+#### 7.1.3 Javadoc 标记
+
+标准的 Javadoc 注解标记按以下顺序出现：`@param`, `@return`, `@throws`, `@deprecated`, 前面这 4 种标记如果出现，描述都不能为空。当描述无法在一行中容纳，连续行需要至少在 `@` 符号的位置处缩进 `4` 个空格。
+
+#### 7.2 摘要片段
+
+每个 Javadoc 都以一个简短的**摘要片段**开始。这个片段是非常重要的，它是文本在某些上下文（如类和方法索引）中出现的唯一部分。
+
+这只是一个小片段，可以是一个名词短语或动词短语，但不是一个完整的句子。它不会以 `A {@code Foo} is a...` 或者 `This method returns...` 开头, 它也不会是一个完整的祈使句，如 `Save the record.`。但是，由于开头大写且被加了标点符号，它看起来就像是个完整的句子。
+
+> **提示**：一个常见的错误是把简单的 Javadoc 写成 `/** @return the customer ID */`，这是不正确的。它应该写成 `/** Returns the customer ID. */`。
+
+### 7.3 在哪里使用 Javadoc
+
+至少在每个 `public` 类及它的每个 `public` 和 `protected` 成员处使用 Javadoc，下面会提到一些例外情况：
+
+额外的 Javadoc 内容也可能存在，如第 7.3.4 节[非必需的Javadoc](#)。
+
+#### 7.3.1 例外：不言自明的方法
+
+对于简单明显的方法如 `getFoo`，Javadoc 是可选的。这种情况下除了写 “`Returns the foo`”，确实也没有什么值得写了。
+
+> **重要提示**：如果有一些相关信息是需要读者了解的，那么以上的例外不应作为忽视这些信息的理由。例如，对于 `getCanonicalName` 方法，就不应该忽视文档说明，因为读者很可能不知道词语 “`canonical name`” 指的是什么。
+
+#### 7.3.2 例外：重写
+
+如果一个方法重写了超类中的方法，那么 Javadoc 并非必需的。
+
+#### 7.3.3 可选的 Javadoc
+
+对于包外不可见的类和方法，如有需要，也是要使用 Javadoc 的。如果一个注释是用来定义一个类，方法，字段的整体目的或行为，那么这个注释应该写成 Javadoc，这样更统一、更友好。
+
+#### 7.3.4 不需要 Javadoc 的情况
+
+其他类和成员种根据实际是否需要来写 Javadoc。
+
+每当将注释用于定义类或成员的总体目的或行为时，该注释就会改为使用 Javadoc 来编写（使用`/**`）。
+
+非必需的 Javadoc 并不要求严格遵循第 7.1.2、7.1.3 和 7.2 节的格式化规则，当然是推荐遵循的。
