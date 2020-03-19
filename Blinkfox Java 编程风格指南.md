@@ -7,6 +7,10 @@
 - [修改]列长度限制改为了 `120` 个字符；（**修改原因**：Java 相比其他编程语言而言，类和方法的命名都要“长”很多，这样所占的列数就更多，如果列限制仅设置为 `100` 的话，代码被折行的几率会更大。且在当前大屏幕流行的时代，屏幕右边会空出一大部分空间并没有被代码真正的填充，简直就是浪费，而且使得阅读代码时，视线会重复“跳行”。）
 - [修改]枚举实例之间需要换行，且附加文档注释；（**修改原因**：枚举本质上也是类，所以，类中的很多规则也适用于枚举。由于枚举实例都是 `public static final` 的，所以，也必然需要添加 Javadoc 注释，所以，实例与实例之间需要使用换行来分割。）
 - [修改]注解应用到类、属性、构造方法、方法上时，应紧接 Javadoc 之后，且独立成行。如果注解应用在参数或者局部变量上时，建议与他们写到一行。（**修改原因**：易于识别和阅读。）
+- [修改]类命名如果是以 `DO`、`DTO`、`BO` 等结尾的领域模型类时，可以考虑使用连续大写。（**修改原因**：这里修改的主要原因是为了“**兼容**”阿里规约，但我本人建议少使用这些对象，不仅刻板，而且会造成大量的重复代码、属性来回的设值或复制等，后续维护也要同时维护多个实体。程序员虽然遵循规范，但也不应该是机械的，应该视具体的业务场景建立对应的相关实体类和该类的专属行为。所以，我的个人建议是除了数据库层的实体类，其他实体类应该使用“充血模型”，这样更加面向对象编程。因此考验程序员的难点就成了“如何设计充血模型”，或者说“如何从复杂的业务中分离出恰到好处的逻辑行为放到 `VO` 之类的方法中”。但如果你的团队程序员以初级工程师为主，且业务都是 `CRUD` 的话，可以规范使用“贫血模型”。）
+-[新增]抽象类命名使用 `Abstract` 开头，枚举类后建议以 `Enum` 或 `Type` 结尾，枚举实例值的单词之间用下划线（`_`）来分割。异常类命名使用`Exception`结尾；测试类命名以它要测试的类的名称开始，以 `Test` 结尾。接口名**不建议**使用 `I` 作为前缀，跟 JDK 学习，应该考虑使用名词或形容词。
+-[新增]命名选择使用英文单词还是中文词语。（**新增原因**：本人及工作的团队也都是中国人，在编程领域的命名通常使用英文单词即可。但如果涉及到专业领域的词汇，翻译不出简单而又准确的英文时，需要考察实际情况选择使用中文拼音或中文简拼来命名，且附上准确的 Javadoc 注释，不要使用晦涩难懂或存在严重歧义的英文单词。）
+- [修改]泛型名都以单个大写字母开头。（**修改原因**：跟 JDK 中的命名方式保持一致。）
 
 ## 1 前言
 
@@ -338,92 +342,9 @@ public protected private abstract default static final transient volatile synchr
 
 ## 5 命名
 
-### 5.1 对所有标识符都通用的规则
+### 5.1 驼峰命名法（CamelCase）的定义
 
-标识符只能使用 ASCII 字母和数字，并且在以下少数情况下才使用下划线。因此每个有效的标识符名称都能使用正则表达式 `\w+` 来匹配。
-
-在 Google 编程风格中不使用特殊的前缀或后缀，如`name_`, `mName`, `s_name` 或 `kName`。
-
-### 5.2 标识符类型的规则
-
-#### 5.2.1 包名
-
-包名全部小写，连续的单词只是简单地连接起来，不使用下划线。例如：使用 `com.example.deepspace`，而不是 `com.example.deepSpace` 或者 `com.example.deep_space`。
-
-#### 5.2.2 类名
-
-类名都以大驼峰（[UpperCamelCase](#)）风格编写。
-
-类名通常是名词或名词短语。例如：`Character` 或者 `ImmutableList`。接口名称也可以是名词或名词短语（例如：`List`），但有时可能是形容词或形容词短语（例如：`Readable`）。
-
-注解的命名还没有特定的规则，甚至没有完善的约定。
-
-测试类的命名以它要测试的类的名称开始，以 `Test` 结束。例如：`HashTest` 或 `HashIntegrationTest`。
-
-#### 5.2.3 方法名
-
-方法名都以小驼峰（[lowerCamelCase](#)）风格编写。
-
-方法名通常是动词或动词短语。例如：`sendMessage` 或者 `stop`。
-
-下划线可能出现在 JUnit 测试方法名称中，用以分隔名称的逻辑组成，每个组成部分均用 [lowerCamelCase](#) 编写。一个典型的模式是：`<MethodUnderTest>_<state>`，例如：`Pop_emptyStack`。并不存在唯一正确的方式来命名测试方法。
-
-#### 5.2.4 常量名
-
-常量名的命名模式为 `CONSTANT_CASE`，字母全部大写，使用下划线来分隔单词。那到底什么算是一个常量呢？
-
-每个常量都是一个静态 `final` 字段，其内容是不可变的，且没有可检测的副作用。这包括原始类型、字符串、不可变类型和不可变类型的不可变集合。如果任何一个实例的观测状态是可变的，则它肯定不会是一个常量。不可变对象不一定是常量。例如：
-
-```java
-// 下面是常量.
-static final int NUMBER = 5;
-static final ImmutableList<String> NAMES = ImmutableList.of("Ed", "Ann");
-static final ImmutableMap<String, Integer> AGES = ImmutableMap.of("Ed", 35, "Ann", 32);
-static final Joiner COMMA_JOINER = Joiner.on(','); // because Joiner is immutable
-static final SomeMutableType[] EMPTY_ARRAY = {};
-enum SomeEnum { ENUM_CONSTANT }
-
-// 下面的情况不是常量.
-static String nonFinal = "non-final";
-final String nonStatic = "non-static";
-static final Set<String> mutableCollection = new HashSet<String>();
-static final ImmutableSet<SomeMutableType> mutableElements = ImmutableSet.of(mutable);
-static final ImmutableMap<String, SomeMutableType> mutableValues =
-    ImmutableMap.of("Ed", mutableInstance, "Ann", mutableInstance2);
-static final Logger logger = Logger.getLogger(MyClass.getName());
-static final String[] nonEmptyArray = {"these", "can", "change"};
-```
-
-这些常量的名字通常是名词或名词短语。
-
-#### 5.2.5 非常量字段名
-
-非常量字段名以小驼峰（`lowerCamelCase`）风格命名。
-
-这些名字通常是名词或名词短语。例如：`computedValues` 或者 `index`。
-
-#### 5.2.6 参数名
-
-参数名以小驼峰（`lowerCamelCase`）风格命名。
-
-在公共方法中应该避免用单个字符来对参数进行命名。
-
-#### 5.2.7 局部变量名
-
-局部变量名以小驼峰（`lowerCamelCase`）风格命名。
-
-即使局部变量是 `final` 和不可改变的，也不应该把它示为常量，当然也就不能用常量的规则去命名它。
-
-#### 5.2.8 泛型名
-
-泛型可以用以下两种风格之一进行命名：
-
-- 单个的大写字母，后面可以视具体情况跟一个数字（如：`E`, `T`, `X`, `T2`）。
-- 以类命名方式(5.2.2 节，[类名](#))，后面加个大写的 `T`（如：`RequestT`, `FooBarT`）。
-
-### 5.3 驼峰命名法（CamelCase）的定义
-
-**驼峰式命名法**分大驼峰式命名法（`UpperCamelCase`）和小驼峰式命名法（`lowerCamelCase`）。有时，我们有多种合理的方式将一个英语词组转换成驼峰形式，如缩略语或不寻常的结构，例如：`IPv6` 或 `iOS`。Google 风格指定了以下的（几乎）确定性的转换方案。
+**驼峰式命名法**分大驼峰式命名法（`UpperCamelCase`）和小驼峰式命名法（`lowerCamelCase`）。有时，我们有多种合理的方式将一个英语词组转换成驼峰形式，如缩略语或不寻常的结构，例如：`IPv6` 或 `iOS`。以下是一个（几乎）确定性的转换方案。
 
 名字从散文形式（`prose form`）开始:
 
@@ -448,6 +369,45 @@ static final String[] nonEmptyArray = {"these", "can", "change"};
 加 `*` 号处表示可以接受，但不推荐。
 
 > **注意**：在英语中，某些带有连字符的单词形式不唯一。例如：`nonempty` 和 `non-empty` 都是正确的，因此方法名`checkNonempty`和`checkNonEmpty`也都是正确的。
+
+### 5.2 类名、方法名
+
+- 标识符只能使用 ASCII 字母和数字，不使用特殊的前缀或后缀，如`name_`, `cName`, `c_name`。
+- **包名全部小写，连续的单词只是简单地连接起来，不使用下划线**。例如：使用 `com.example.deepspace`，而不是 `com.example.deepSpace` 或者 `com.example.deep_space`。
+- 类名、接口名、枚举类名、注解名都以大驼峰（`UpperCamelCase`）风格编写，但领域模型实体类（以 DO、DTO、BO、VO 等结尾）仍然可以使用连续大写，不建议大量使用 `DO`、`DTO`、`VO` 等，视业务情况使用，且考虑建立公共属性的父类，使用**继承**的方式，减少重复属性的定义和不同类之间的属性复制。
+- 抽象类命名使用 `Abstract` 开头，枚举类后建议以 `Enum` 或 `Type` 结尾，枚举实例值的单词之间用下划线（`_`）来分割。异常类命名使用`Exception`结尾；测试类命名以它要测试的类的名称开始，以 `Test` 结尾。接口名**不建议**使用 `I` 作为前缀，跟 JDK 学习，应该考虑使用名词或形容词。
+- 类名、枚举类名通常是名词或名词短语。接口名称也可以是名词或名词短语，也可以是形容词或形容词短语（例如：`Readable`）。自定义注解名可以是名称，动词或形容词。
+- 属性名、方法名、参数名、局部变量名都以小驼峰（`lowerCamelCase`）风格编写。属性名通常是是名称，方法名是动词或动词短语。
+- 泛型名以单个的大写字母命名（如：`E`, `K`, `V`）。
+- 类名、属性名、方法名等通常使用英文单词或短语来命名。但是，如果该词语是某些**专业领域**的中文名称（如：政法相关的内容），且**难以翻译**成简单而又准确的英语单词时，不推荐直接使用英文或中文汉字来命名，而是使用**中文拼音**或**中文简拼**，并且写上准确含义 Javadoc 注释。
+
+### 5.3 常量名
+
+- 常量名的命名模式为 `CONSTANT_CASE`，字母全部大写，使用下划线来分隔单词，且常量的名字通常是名词或名词短语。
+
+每个常量都是一个静态 `final` 字段，其内容是不可变的，且没有可检测的副作用。这包括原始类型、字符串、不可变类型和不可变类型的不可变集合。如果任何一个实例的观测状态是可变的，则它肯定不会是一个常量。**不可变对象不一定是常量**。例如：
+
+```java
+// 下面是常量.
+static final int NUMBER = 5;
+static final ImmutableList<String> NAMES = ImmutableList.of("Ed", "Ann");
+static final ImmutableMap<String, Integer> AGES = ImmutableMap.of("Ed", 35, "Ann", 32);
+static final Joiner COMMA_JOINER = Joiner.on(','); // because Joiner is immutable
+static final SomeMutableType[] EMPTY_ARRAY = {};
+enum SomeEnum { ENUM_CONSTANT }
+
+// 下面的情况不是常量.
+static String nonFinal = "non-final";
+final String nonStatic = "non-static";
+static final Set<String> mutableCollection = new HashSet<String>();
+static final ImmutableSet<SomeMutableType> mutableElements = ImmutableSet.of(mutable);
+static final ImmutableMap<String, SomeMutableType> mutableValues =
+    ImmutableMap.of("Ed", mutableInstance, "Ann", mutableInstance2);
+static final Logger logger = Logger.getLogger(MyClass.getName());
+static final String[] nonEmptyArray = {"these", "can", "change"};
+```
+
+> **注**：根据这里常量的定义，阿里规约插件常量识别机制是有问题的，阿里规约插件认为只要有**static final**修饰符的就是常量，必须要大写，曲解了常量。
 
 ## 6 编程实践
 
