@@ -15,7 +15,7 @@
 
 <module name = "Checker">
     <property name="charset" value="UTF-8"/>
-    <!-- 检查出问题的错误级别，这里设置为 error，便于做持续集成. -->
+    <!-- 检查出问题的错误级别，这里设置为 error，目的是便于 Maven 构建时，能在检查出问题后使构建失败. -->
     <property name="severity" value="error"/>
 
     <property name="fileExtensions" value="java, properties, xml"/>
@@ -37,6 +37,7 @@
         <property name="eachLine" value="true"/>
     </module>
 
+    <!-- 列长度限制，这里我定义为 120，且对于含有 package, import, http 等关键字的忽略其列长度限制. -->
     <module name="LineLength">
         <property name="fileExtensions" value="java"/>
         <property name="max" value="120"/>
@@ -284,28 +285,35 @@
         </module>
         <module name="JavadocParagraph"/>
         <module name="AtclauseOrder">
-            <property name="tagOrder" value="@param, @return, @throws, @deprecated"/>
+            <!-- 约定 Javadoc 注解标记的先后顺序. -->
+            <property name="tagOrder" value="@param, @return, @throws, @deprecated, @see, @since, @author"/>
             <property name="target"
              value="CLASS_DEF, INTERFACE_DEF, ENUM_DEF, METHOD_DEF, CTOR_DEF, VARIABLE_DEF"/>
         </module>
+        <!-- Javadoc 方法注释，检查 protected 及其之上的 public 域，且不能缺失 @param 和 @return 的注解标记. -->
         <module name="JavadocMethod">
-            <property name="scope" value="public"/>
-            <property name="allowMissingParamTags" value="true"/>
-            <property name="allowMissingReturnTag" value="true"/>
+            <property name="scope" value="protected"/>
+            <property name="allowMissingParamTags" value="false"/>
+            <property name="allowMissingReturnTag" value="false"/>
+            <!-- Javadoc 方法注释，允许在具有 @Override 和 @Test 注解的方法上写 Javadoc 注释. -->
             <property name="allowedAnnotations" value="Override, Test"/>
             <property name="tokens" value="METHOD_DEF, CTOR_DEF, ANNOTATION_FIELD_DEF"/>
         </module>
+        <!-- 可以缺失的 Javadoc 方法注释，检查 public 域，且最小代码行数小于 0 行时，才可缺失（即无论如何都不可缺失）. -->
         <module name="MissingJavadocMethod">
-            <property name="scope" value="public"/>
-            <property name="minLineCount" value="2"/>
+            <property name="scope" value="protected"/>
+            <property name="minLineCount" value="0"/>
+            <!-- Javadoc 方法注释，允许在具有 @Override 和 @Test 注解的方法上不写 Javadoc 注释. -->
             <property name="allowedAnnotations" value="Override, Test"/>
             <property name="tokens" value="METHOD_DEF, CTOR_DEF, ANNOTATION_FIELD_DEF"/>
         </module>
+        <!-- 方法名使用小驼峰的模式. -->
         <module name="MethodName">
             <property name="format" value="^[a-z][a-z0-9][a-zA-Z0-9_]*$"/>
             <message key="name.invalidPattern"
              value="Method name ''{0}'' must match pattern ''{1}''."/>
         </module>
+        <!-- 单行的 Javadoc，不忽略行内标签. -->
         <module name="SingleLineJavadoc">
             <property name="ignoreInlineTags" value="false"/>
         </module>
