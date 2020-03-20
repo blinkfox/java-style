@@ -2,14 +2,17 @@
 
 - [新增]新增了类成员的排列顺序约定。（**新增原因**：相比 Google 风格指南文档中“模糊而又正确”的说法，采用了更为“确定性、可明确实施的”约定。）
 - [新增]不使用行尾注释，建议在代码行或逻辑行之上做单行注释即可。（**新增原因**：不容易首先阅读到，且行尾注释会占列长度，且容易导致超过列长度限制，后期维护注释麻烦。）
+- [新增]抽象类命名使用 `Abstract` 开头，枚举类后建议以 `Enum` 或 `Type` 结尾，枚举实例值的单词之间用下划线（`_`）来分割。异常类命名使用`Exception`结尾；测试类命名以它要测试的类的名称开始，以 `Test` 结尾。接口名**不建议**使用 `I` 作为前缀，跟 JDK 学习，应该考虑使用名词或形容词。
+- [新增]命名选择使用英文单词还是中文词语。（**新增原因**：本人及工作的团队也都是中国人，在编程领域的命名通常使用英文单词即可。但如果涉及到专业领域的词汇，翻译不出简单而又准确的英文时，需要考察实际情况选择使用中文拼音或中文简拼来命名，且附上准确的 Javadoc 注释，不要使用晦涩难懂或存在严重歧义的英文单词。）
+- [新增]新增了换行时，末尾以空行结尾的建议。（**新增原因**：这只是一个建议的写法，非强制，这样写也是由于“历史原因”引起的，我这里的目的也是跟 Java 源码的风格保持一致。）
+- [新增]新增了 `@author`、`@since`、`@see` 等 Javadoc 标签的使用说明示例。（**新增原因**：在写 Javadoc 时这些注解也是十分有用的，便于大家写出更好的 Javadoc 注释代码。）
 - [修改]如果空语句块，也需要遵守 `K&R` 风格，且增加了语句为空的理由注释；（**修改原因**：更加明确的规范，利于大家写出“更加一致”的代码，且有助于后来人理解为什么要保持语句块是空的。）
 - [修改]缩进空格数改为了 `4` 个空格；（**修改原因**：根据我实际的编程经验，`2` 个空格的代码缩进，在当前大屏幕流行的时代，会显得十分拥挤（挤成一坨），反而使得代码`臃肿`不够美观。所以，我这里建议使用`4`个空格来缩进，会使得更加美观、协调，而且能侧面督促开发人员减少代码的嵌套层数。）
 - [修改]列长度限制改为了 `120` 个字符；（**修改原因**：Java 相比其他编程语言而言，类和方法的命名都要“长”很多，这样所占的列数就更多，如果列限制仅设置为 `100` 的话，代码被折行的几率会更大。且在当前大屏幕流行的时代，屏幕右边会空出一大部分空间并没有被代码真正的填充，简直就是浪费，而且使得阅读代码时，视线会重复“跳行”。）
 - [修改]枚举实例之间需要换行，且附加文档注释；（**修改原因**：枚举本质上也是类，所以，类中的很多规则也适用于枚举。由于枚举实例都是 `public static final` 的，所以，也必然需要添加 Javadoc 注释，所以，实例与实例之间需要使用换行来分割。）
 - [修改]注解应用到类、属性、构造方法、方法上时，应紧接 Javadoc 之后，且独立成行。如果注解应用在参数或者局部变量上时，建议与他们写到一行。（**修改原因**：易于识别和阅读。）
 - [修改]类命名如果是以 `DO`、`DTO`、`BO` 等结尾的领域模型类时，可以考虑使用连续大写。（**修改原因**：这里修改的主要原因是为了“**兼容**”阿里规约，但我本人建议少使用这些对象，不仅刻板，而且会造成大量的重复代码、属性来回的设值或复制等，后续维护也要同时维护多个实体。程序员虽然遵循规范，但也不应该是机械的，应该视具体的业务场景建立对应的相关实体类和该类的专属行为。所以，我的个人建议是除了数据库层的实体类，其他实体类应该使用“充血模型”，这样更加面向对象编程。因此考验程序员的难点就成了“如何设计充血模型”，或者说“如何从复杂的业务中分离出恰到好处的逻辑行为放到 `VO` 之类的方法中”。但如果你的团队程序员以初级工程师为主，且业务都是 `CRUD` 的话，可以规范使用“贫血模型”。）
--[新增]抽象类命名使用 `Abstract` 开头，枚举类后建议以 `Enum` 或 `Type` 结尾，枚举实例值的单词之间用下划线（`_`）来分割。异常类命名使用`Exception`结尾；测试类命名以它要测试的类的名称开始，以 `Test` 结尾。接口名**不建议**使用 `I` 作为前缀，跟 JDK 学习，应该考虑使用名词或形容词。
--[新增]命名选择使用英文单词还是中文词语。（**新增原因**：本人及工作的团队也都是中国人，在编程领域的命名通常使用英文单词即可。但如果涉及到专业领域的词汇，翻译不出简单而又准确的英文时，需要考察实际情况选择使用中文拼音或中文简拼来命名，且附上准确的 Javadoc 注释，不要使用晦涩难懂或存在严重歧义的英文单词。）
+
 - [修改]泛型名都以单个大写字母开头。（**修改原因**：跟 JDK 中的命名方式保持一致。）
 
 ## 1 前言
@@ -152,6 +155,7 @@ Predicate<String> predicate = str ->
 - **类成员之间需要单个空行隔开**：例如：字段，构造函数，方法，内部类，静态初始化块，实例初始化块。在类的第一个成员之前或最后一个成员之后，使用空行。两个连续属性之间的空行是可选的，根据需要使用空行来创建字段间的逻辑分组。但是，如果是业务属性字段，强烈建议对其进行文档注释，且这些业务属性字段之间也需要空行。
 - **一个空行也可以出现在任何提高可读性的地方**，例如，在一个方法或代码块中，不同的子逻辑之间用空行隔开。
 - 不要使用多个连续的空行，**最多只能空一行**。
+- 建议在每个 Java 源文件末尾留一个空行，**建议而不强制**。这也是由于“历史原因”引起的，当然如果你有心的话，你会发现 JDK 的源码中全是这样的。
 
 ### 4.5 空格机制
 
@@ -411,30 +415,8 @@ static final String[] nonEmptyArray = {"these", "can", "change"};
 
 ## 6 编程实践
 
-### 6.1 总是使用 @Override 注解
-
-只要是合法的方法，就要加上 `@Override` 注解，这包括重写超类方法的类方法，实现接口方法的类方法以及重新指定父类接口方法的接口方法。
-
-**例外**：如果父方法为 `@Deprecated` 时，可以省略 `@Override`。
-
-### 6.2 不能忽视捕获的异常
-
-除了下面的例子，对捕获的异常不做任何响应是极少的。(典型的响应方式是打印日志，或者如果它被认为是不可能的，则把它当作一个 `AssertionError` 重新抛出。)
-
-如果它确实是不需要在 `catch` 块中做任何响应，需要做注释加以说明。
-
-```java
-return handleTextResponse(response);
-try {
-  int i = Integer.parseInt(response);
-  return handleNumericResponse(i);
-} catch (NumberFormatException ok) {
-  // 它不是一个数字，不过没关系，继续后续操作
-}
-return handleTextResponse(response);
-```
-
-**例外**：在测试中，如果一个捕获的异常被命名为 `expected`，则它可以被不加注释地忽略。下面是一种非常常见的情形，用以确保所测试的方法会抛出一个期望中的异常， 因此在这里就没有必要加注释。
+- 只要是合法的方法，就要加上 `@Override` 注解，这包括重写超类方法的类方法，实现接口方法的类方法以及重新指定父类接口方法的接口方法。**例外**：如果父方法为 `@Deprecated` 时，可以省略 `@Override`。
+- 不能忽视捕获的异常，**例外**：如果一个捕获的异常被命名为 `expected` 或者 `ignore`，则它可以不用处理，但仍然需要使用注释说明原因。
 
 ```java
 try {
@@ -444,35 +426,38 @@ try {
 }
 ```
 
-### 6.3 使用类来调用静态成员
-
-使用类名调用静态的类成员，而不是具体某个对象或表达式。
+- 使用类名调用静态的类成员，而不是具体某个对象或表达式。示例如下：
 
 ```java
 Foo aFoo = ...;
-Foo.aStaticMethod(); // good
-aFoo.aStaticMethod(); // bad
-somethingThatYieldsAFoo().aStaticMethod(); // very bad
+Foo.aStaticMethod(); // 赞同的方式.
+aFoo.aStaticMethod(); // 糟糕的方式.
+somethingThatYieldsAFoo().aStaticMethod(); // 非常糟糕的方式.
 ```
 
-### 6.4 禁用 Finalizers
-
-极少会去重写 `Object.finalize`。
-
-> **提示**：不要这么做。如果你非要使用它，请先仔细阅读和理解 [Effective Java](http://books.google.com/books?isbn=8131726592) 第 7 条：“Avoid Finalizers”，然后不要使用它。
+- 极少会去重写 `Object.finalize`。不要这么做。如果你非要使用它，请先仔细阅读和理解 [Effective Java](http://books.google.com/books?isbn=8131726592) 第 7 条：“Avoid Finalizers”，然后不要使用它。
 
 ## 7 Javadoc
 
-### 7.1 格式
+### 7.1 如何写文档注释
 
-#### 7.1.1 一般形式
-
-Javadoc 块的基本格式如下所示：
+Javadoc 即文档注释，可以是多行，也可以是单行。当被注释的 Javadoc 只有简单的文字描述时，可以使用单行形式。请注意，这仅适用于没有 `@param`、`@return` 等块标记的情况。Javadoc 块的基本格式如下:
 
 ```java
 /**
- * Multiple lines of Javadoc text are written here,
- * wrapped normally...
+ * Javadoc 摘要示例.
+ *
+ * <p>这是详细描述示例，这是行内注释的代码 {@code int} 的使用.
+ * 这是注释内链接 {@link java.util.concurrent.atomic} 的使用示例.</p>
+ *
+ * 这是一个 HTML <a href="http://baidu.com">超链接</a>的使用示例.
+ *
+ * @param p1 参数说明
+ * @return 返回值说明
+ * @see java.util.concurrent.atomic.AtomicInteger
+ * @since v1.2.0
+ * @author blinkfox add on 2020-03-20.
+ * @author zhangshan modify on 2020-04-05.
  */
 public int method(String p1) { ... }
 ```
@@ -483,48 +468,59 @@ public int method(String p1) { ... }
 /** 一小段的 Javadoc. */
 ```
 
-基本格式总是可以接受的。当整个 Javadoc 块可以放在一行时(包括注释标签)，就可以使用单行形式。请注意，这仅适用于没有 `@return` 等块标记的情况。
+- 每个 Javadoc 都以一个简短的**摘要片段**开始，用于对所注释的类、属性、方法等进行简要的描述。并以**英文句号**（`.`）结尾。因为 Java 在生成 Javadoc 时，会以注释中第一个英文句号作为拆分点，解析出摘要片段和详细描述信息。
+- 空行是只包含最左侧星号（`*`）的空行会出现在段落之间和 Javadoc 注解标记（`@XXX`）之前（如果有的话）。除了第一个段落，每个段落第一个单词前都有标签`<p>`，并且它和第一个单词间没有空格。
+- 标准的 Javadoc 注解标记按以下顺序出现：`@param`, `@return`, `@throws`, `@deprecated`, 前面这 4 种标记如果出现，描述都不能为空。当描述无法在一行中容纳，连续行需要至少在 `@` 符号的位置处缩进 `4` 个空格。
+- 当是第一次新增类或方法时，需要再新增的类或方法上额外加上作者、日期和新增该代码时的版本的注解，即要加上 `@author`、`@since` 注解。其中 `@author` 可以写多个，由于 Javadoc 中没有日期相关的 Javadoc 标签，建议将日期写在 `@author`的作者之后，格式形如：`@author blinkfox on 2020-03-20.`。**注**：如果写上 Javadoc 不支持的 `@date` 标签，在生成 Javadoc 时会报错，且 `@date` 所表示的日期与具体的作者难以对应上。
+- 如果你的类、接口、方法等需要参考或关联其他类或接口，可以使用 `@see` 标签，在 Javadoc 注释内容中，则可以通过 `@link` 去链接，但注意，`@link` 只能链接该类或方法可访问类、属性或方法。
+- 行内的注释中如果包含“代码”，则可以使用 `@code` 包裹起来.
 
-#### 7.1.2 段落
+### 7.2 什么时候需要写 Javadoc
 
-是只包含最左侧星号（`*`）的空行会出现在段落之间和 Javadoc 注解标记（`@XXX`）之前（如果有的话）。除了第一个段落，每个段落第一个单词前都有标签`<p>`，并且它和第一个单词间没有空格。
+- 在每个 `public` 类及它的每个 `public` 和 `protected` 成员处使用 Javadoc。
+- 对于**具有业务含义**的属性字段建议写上 Javadoc。
+- 对于包外不可见的类和方法，如有需要，也是要使用 Javadoc 的。
+- 如果一个注释是用来定义一个类，方法，字段的整体目的或行为，即时是 `private` 的，那么这个注释应该写成 Javadoc，这样更统一、更友好。
 
-#### 7.1.3 Javadoc 标记
+### 7.3 可以不需要 Javadoc 的例外情况
 
-标准的 Javadoc 注解标记按以下顺序出现：`@param`, `@return`, `@throws`, `@deprecated`, 前面这 4 种标记如果出现，描述都不能为空。当描述无法在一行中容纳，连续行需要至少在 `@` 符号的位置处缩进 `4` 个空格。
+- 对于 `getter` 和 `setter` 方法，Javadoc 是可选的，但建议在其字段属性上写明 Javadoc 注释，比如：`canonicalName` 属性，如果不加注释的话，可能后续的维护者难以理解其真正含义。
+- 如果一个方法重写了超类中的方法，那么 Javadoc 也是可选的。
 
-#### 7.2 摘要片段
+### 7.4 JDK 源码中的 Javadoc 示例
 
-每个 Javadoc 都以一个简短的**摘要片段**开始。这个片段是非常重要的，它是文本在某些上下文（如类和方法索引）中出现的唯一部分。
+下面是 JDK 源码中 `Callable` 接口的 Javadoc 示例，大家也可以参考借鉴下：
 
-这只是一个小片段，可以是一个名词短语或动词短语，但不是一个完整的句子。它不会以 `A {@code Foo} is a...` 或者 `This method returns...` 开头, 它也不会是一个完整的祈使句，如 `Save the record.`。但是，由于开头大写且被加了标点符号，它看起来就像是个完整的句子。
+```java
+/**
+ * A task that returns a result and may throw an exception.
+ * Implementors define a single method with no arguments called
+ * {@code call}.
+ *
+ * <p>The {@code Callable} interface is similar to {@link
+ * java.lang.Runnable}, in that both are designed for classes whose
+ * instances are potentially executed by another thread.  A
+ * {@code Runnable}, however, does not return a result and cannot
+ * throw a checked exception.
+ *
+ * <p>The {@link Executors} class contains utility methods to
+ * convert from other common forms to {@code Callable} classes.
+ *
+ * @see Executor
+ * @since 1.5
+ * @author Doug Lea
+ * @param <V> the result type of method {@code call}
+ */
+@FunctionalInterface
+public interface Callable<V> {
 
-> **提示**：一个常见的错误是把简单的 Javadoc 写成 `/** @return the customer ID */`，这是不正确的。它应该写成 `/** Returns the customer ID. */`。
+    /**
+     * Computes a result, or throws an exception if unable to do so.
+     *
+     * @return computed result
+     * @throws Exception if unable to compute a result
+     */
+    V call() throws Exception;
+}
 
-### 7.3 在哪里使用 Javadoc
-
-至少在每个 `public` 类及它的每个 `public` 和 `protected` 成员处使用 Javadoc，下面会提到一些例外情况：
-
-额外的 Javadoc 内容也可能存在，如第 7.3.4 节[非必需的Javadoc](#)。
-
-#### 7.3.1 例外：不言自明的方法
-
-对于简单明显的方法如 `getFoo`，Javadoc 是可选的。这种情况下除了写 “`Returns the foo`”，确实也没有什么值得写了。
-
-> **重要提示**：如果有一些相关信息是需要读者了解的，那么以上的例外不应作为忽视这些信息的理由。例如，对于 `getCanonicalName` 方法，就不应该忽视文档说明，因为读者很可能不知道词语 “`canonical name`” 指的是什么。
-
-#### 7.3.2 例外：重写
-
-如果一个方法重写了超类中的方法，那么 Javadoc 并非必需的。
-
-#### 7.3.3 可选的 Javadoc
-
-对于包外不可见的类和方法，如有需要，也是要使用 Javadoc 的。如果一个注释是用来定义一个类，方法，字段的整体目的或行为，那么这个注释应该写成 Javadoc，这样更统一、更友好。
-
-#### 7.3.4 不需要 Javadoc 的情况
-
-其他类和成员种根据实际是否需要来写 Javadoc。
-
-每当将注释用于定义类或成员的总体目的或行为时，该注释就会改为使用 Javadoc 来编写（使用`/**`）。
-
-非必需的 Javadoc 并不要求严格遵循第 7.1.2、7.1.3 和 7.2 节的格式化规则，当然是推荐遵循的。
+```
