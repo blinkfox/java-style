@@ -477,7 +477,7 @@ public int method(String p1) { ... }
   - 对于要弃用的类或方法，则使用 `@deprecated` 注解标记，并解释为什么弃用的原因。
   - 如果你的类、接口、方法等需要参考或关联其他类或接口，可以使用 `@see` 标签，在 Javadoc 注释内容中，则可以通过 `@link` 去链接，但注意，`@link` 只能链接该类或方法可访问类、属性或方法。
   - 当是第一次新增类或方法时。需要再新增的类或方法上额外加上作者、日期和新增该代码时的版本的注解，即要加上 `@author`、`@since` 注解，其中 `@author` 可以写多个，由于 Javadoc 中没有日期相关的 Javadoc 标签，建议将日期写在 `@author`的作者之后，格式形如：`@author blinkfox add on 2020-03-20.`。**注**：如果写上 Javadoc 不支持的 `@date` 标签，在生成 Javadoc 时会报错，且 `@date` 所表示的日期与具体的作者难以对应上。
-- 标准的 Javadoc 注解标记按以下顺序出现：`@param`, `@return`, `@throws`, `@deprecated`、`@see`, `@since`, `@author`, 这几种标记如果出现，描述都不能为空。当描述无法在一行中容纳，连续行需要至少在 `@` 符号的位置处缩进 `4` 个空格。
+- 标准的 Javadoc 注解标记按以下顺序出现：`@param`, `@return`, `@throws`, `@deprecated`、`@author`, `@see`, `@since`, 这几种标记如果出现，描述都不能为空。当描述无法在一行中容纳，连续行需要至少在 `@` 符号的位置处缩进 `4` 个空格。
 - 行内的注释中如果包含“代码”，则可以使用 `@code` 包裹起来.
 
 ### 7.2 什么时候需要写 Javadoc
@@ -498,34 +498,77 @@ public int method(String p1) { ... }
 
 ```java
 /**
- * A task that returns a result and may throw an exception.
- * Implementors define a single method with no arguments called
- * {@code call}.
+ * The {@code String} class represents character strings. All
+ * string literals in Java programs, such as {@code "abc"}, are
+ * implemented as instances of this class.
+ * <p>
+ * Strings are constant; their values cannot be changed after they
+ * are created. String buffers support mutable strings.
+ * Because String objects are immutable they can be shared. For example:
+ * <blockquote><pre>
+ *     String str = "abc";
+ * </pre></blockquote><p>
+ * is equivalent to:
+ * <blockquote><pre>
+ *     char data[] = {'a', 'b', 'c'};
+ *     String str = new String(data);
+ * </pre></blockquote><p>
+ * Here are some more examples of how strings can be used:
+ * <blockquote><pre>
+ *     System.out.println("abc");
+ *     String cde = "cde";
+ *     System.out.println("abc" + cde);
+ *     String c = "abc".substring(2,3);
+ *     String d = cde.substring(1, 2);
+ * </pre></blockquote>
+ * <p>
+ * The class {@code String} includes methods for examining
+ * individual characters of the sequence, for comparing strings, for
+ * searching strings, for extracting substrings, and for creating a
+ * copy of a string with all characters translated to uppercase or to
+ * lowercase. Case mapping is based on the Unicode Standard version
+ * specified by the {@link java.lang.Character Character} class.
+ * <p>
+ * The Java language provides special support for the string
+ * concatenation operator (&nbsp;+&nbsp;), and for conversion of
+ * other objects to strings. String concatenation is implemented
+ * through the {@code StringBuilder}(or {@code StringBuffer})
+ * class and its {@code append} method.
+ * String conversions are implemented through the method
+ * {@code toString}, defined by {@code Object} and
+ * inherited by all classes in Java. For additional information on
+ * string concatenation and conversion, see Gosling, Joy, and Steele,
+ * <i>The Java Language Specification</i>.
  *
- * <p>The {@code Callable} interface is similar to {@link
- * java.lang.Runnable}, in that both are designed for classes whose
- * instances are potentially executed by another thread.  A
- * {@code Runnable}, however, does not return a result and cannot
- * throw a checked exception.
+ * <p> Unless otherwise noted, passing a <tt>null</tt> argument to a constructor
+ * or method in this class will cause a {@link NullPointerException} to be
+ * thrown.
  *
- * <p>The {@link Executors} class contains utility methods to
- * convert from other common forms to {@code Callable} classes.
+ * <p>A {@code String} represents a string in the UTF-16 format
+ * in which <em>supplementary characters</em> are represented by <em>surrogate
+ * pairs</em> (see the section <a href="Character.html#unicode">Unicode
+ * Character Representations</a> in the {@code Character} class for
+ * more information).
+ * Index values refer to {@code char} code units, so a supplementary
+ * character uses two positions in a {@code String}.
+ * <p>The {@code String} class provides methods for dealing with
+ * Unicode code points (i.e., characters), in addition to those for
+ * dealing with Unicode code units (i.e., {@code char} values).
  *
- * @see Executor
- * @since 1.5
- * @author Doug Lea
- * @param <V> the result type of method {@code call}
+ * @author  Lee Boynton
+ * @author  Arthur van Hoff
+ * @author  Martin Buchholz
+ * @author  Ulf Zibis
+ * @see     java.lang.Object#toString()
+ * @see     java.lang.StringBuffer
+ * @see     java.lang.StringBuilder
+ * @see     java.nio.charset.Charset
+ * @since   JDK1.0
  */
-@FunctionalInterface
-public interface Callable<V> {
+public final class String
+    implements java.io.Serializable, Comparable<String>, CharSequence {
 
-    /**
-     * Computes a result, or throws an exception if unable to do so.
-     *
-     * @return computed result
-     * @throws Exception if unable to compute a result
-     */
-    V call() throws Exception;
+    ...
 }
 
 ```

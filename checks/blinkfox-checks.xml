@@ -286,7 +286,7 @@
         <module name="JavadocParagraph"/>
         <module name="AtclauseOrder">
             <!-- 约定 Javadoc 注解标记的先后顺序. -->
-            <property name="tagOrder" value="@param, @return, @throws, @deprecated, @see, @since, @author"/>
+            <property name="tagOrder" value="@param, @return, @throws, @deprecated, @author, @see, @since"/>
             <property name="target"
              value="CLASS_DEF, INTERFACE_DEF, ENUM_DEF, METHOD_DEF, CTOR_DEF, VARIABLE_DEF"/>
         </module>
