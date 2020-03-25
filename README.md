@@ -1,6 +1,6 @@
 # Java 编程风格指南 (java-style)
 
-这是关于 Java 编程风格相关的仓库。核心来自于 Google 的 Java 编程风格指南（(Google Java Style Guide)[https://checkstyle.sourceforge.io/styleguides/google-java-style-20180523/javaguide.html#s3.3.3-import-ordering-and-spacing]，并对该份英文指南做了翻译，并最终整理出了适合我和更多人的一份规范来。
+这是关于 Java 编程风格相关的仓库。核心来自于 Google 的 Java 编程风格指南（[Google Java Style Guide](https://checkstyle.sourceforge.io/styleguides/google-java-style-20180523/javaguide.html#s3.3.3-import-ordering-and-spacing)，并对该份英文指南做了翻译，并最终整理出了适合我和更多人的一份规范来。
 
 ## 主要内容
 
