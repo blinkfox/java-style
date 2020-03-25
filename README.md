@@ -23,7 +23,7 @@
 
 ## 如何使用
 
-本仓库的核心产出结果主要是《Google Java 编程风格指南.md》、《Blinkfox Java 编程风格指南》、《blinkfox-checks.xml》、《blinkfox-idea-java-style.xml》。其中《Google Java 编程风格指南.md》和《Blinkfox Java 编程风格指南》是文档型，主要供大家阅读参考。而[《blinkfox-checks.xml》](#)和[《blinkfox-idea-java-style.xml》](#) 才是真正可实际用于工具和项目中的代码风格检查和格式化文件。
+本仓库的核心产出结果主要是《Google Java 编程风格指南.md》、《Blinkfox Java 编程风格指南》、《blinkfox-checks.xml》、《blinkfox-idea-java-style.xml》。其中《Google Java 编程风格指南.md》和《Blinkfox Java 编程风格指南》是文档型，主要供大家阅读参考。而[《blinkfox-checks.xml》](https://github.com/blinkfox/java-style/blob/master/checks/blinkfox-checks.xml)和[《blinkfox-idea-java-style.xml》](https://github.com/blinkfox/java-style/blob/master/checks/blinkfox-idea-java-style.xml) 才是真正可实际用于工具和项目中的代码风格检查和格式化文件。
 
 ### 1. Maven 项目中集成使用 blinkfox-checks.xml
 
