@@ -16,6 +16,7 @@
         <package name="javax" withSubpackages="true" static="false" />
         <package name="lombok" withSubpackages="true" static="false" />
         <package name="net" withSubpackages="true" static="false" />
+        <package name="okhttp3" withSubpackages="true" static="false" />
         <package name="org" withSubpackages="true" static="false" />
         <package name="redis" withSubpackages="true" static="false" />
         <package name="rs" withSubpackages="true" static="false" />
