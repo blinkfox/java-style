@@ -89,7 +89,7 @@
 
 #### 2.2 配置 blinkfox-checks.xml
 
-然后，在**设置**里面 `Preferences`（或 `Settings`） -> `Other Settings` 中，找到并点击 `Checkstyle` 选项，通过 `+` 号按钮添加我们自己的 Checkstyle 配置文件，添写描述信息、添加你本地或远程地址上的 Checkstyle 文件，点击“下一步”，“完成”即可。
+然后，在**设置** `Preferences`（或 `Settings`） -> `Other Settings` 中，找到并点击 `Checkstyle` 选项，通过 `+` 号按钮添加我们自己的 Checkstyle 配置文件，添写描述信息、添加你本地或远程地址上的 Checkstyle 文件，点击“下一步”，“完成”即可。
 
 ![添加](assets/images/add-blinkfox-checks.png)
 
@@ -97,6 +97,16 @@
 
 #### 2.3 在 IDEA 中进行检查
 
+最后，在 IDEA 中点开 `CheckStyle` 窗口，选中之前添加的 `Blinkfox Checks` 配置，之后就可以对某个具体类、模块或项目进行检查了。
+
+![在 IDEA 中做检查](assets/images/idea-check.png)
+
 ### 3. Intellij IDEA 中使用 blinkfox-idea-java-style.xml
 
-待续 ...
+`blinkfox-idea-java-style.xml` 是一个用于导入到 Intellij IDEA 中的代码格式化配置文件。可以[前往这里下载](https://github.com/blinkfox/java-style/blob/master/checks/blinkfox-idea-java-style.xml)，存放到你自己的某个本地文件目录中。
+
+首先，在 **设置** `Preferences`（或 `Settings`） -> `Editor` -> `Code Style` -> `Java` 选项中，点击 Schema 后的设置按钮，点击 `Import Schema` -> `Intellij IDEA code style XML` 文件，选择你刚刚下载的 `blinkfox-idea-java-style.xml` 文件即可。
+
+![在 IDEA 中做检查](assets/images/import-idea-style-xml.png)
+
+导入完成之后，可以在单个文件、文件夹、模块、项目的 Java 文件中，使用 `Ctrl + Alt + L` 来格式化文件，使代码更加符合规范和统一的风格。当然你还可以使用 `Ctrl + Alt + O` 来优化包的导入顺序。
