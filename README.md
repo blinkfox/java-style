@@ -1,4 +1,12 @@
-# Blinkfox Java 编程风格指南
+<p align="center">
+  <a href="https://docsify.js.org">
+    <img alt="docsify" src="docs/assets/images/logo.png">
+  </a>
+</p>
+
+<p align="center">
+  Blinkfox Java 编程风格指南，且包含 CheckStyle 和 IDEA 格式化文件。
+</p>
 
 [![HitCount](http://hits.dwyl.io/blinkfox/java-style.svg)](http://hits.dwyl.io/blinkfox/java-style) [![GitHub license](https://img.shields.io/github/license/blinkfox/java-style.svg)](https://github.com/blinkfox/java-style/blob/master/LICENSE) [![Docs Site](https://img.shields.io/badge/Docs%20Site-%E6%96%87%E6%A1%A3%E7%BD%91%E7%AB%99-orange)](https://blinkfox.github.io/java-style)
 
