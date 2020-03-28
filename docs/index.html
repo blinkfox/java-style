@@ -11,14 +11,14 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <link rel="shortcut icon" type="image/x-icon" href="favicon.ico"/>
-    <link href="//cdn.jsdelivr.net/npm/docsify@4.11.3/themes/vue.css" rel="stylesheet">
+    <link href="//cdn.bootcss.com/docsify/4.11.2/themes/vue.css" rel="stylesheet">
 </head>
 <body>
 <div id="app">加载中...</div>
 
 <script>
     window.$docsify = {
-        name: 'Blinkfox Java Style',
+        name: '🌤️ Blinkfox Java Style',
         repo: 'https://github.com/blinkfox/java-style',
         coverpage: true,
         loadSidebar: true,
@@ -35,6 +35,11 @@
             placeholder: '搜索...',
             noData: '找不到结果!'
         },
+        copyCode: {
+            buttonText : '点击复制',
+            errorText  : '错误',
+            successText: '已复制'
+        },
         plugins: [
             function (hook, vm) {
                 hook.beforeEach(function (html) {
@@ -50,10 +55,11 @@
         ]
     }
 </script>
-<script src="//cdn.jsdelivr.net/npm/docsify@4.11.3/lib/docsify.min.js"></script>
+<script src="//cdn.bootcss.com/docsify/4.11.2/docsify.min.js"></script>
 <script src="//cdn.bootcss.com/prism/1.19.0/components/prism-java.min.js"></script>
-<script src="//cdn.jsdelivr.net/npm/docsify@4.11.3/lib/plugins/search.min.js"></script>
-<script src="//cdn.jsdelivr.net/npm/docsify@4.11.3/lib/plugins/zoom-image.min.js"></script>
-<script src="//cdn.jsdelivr.net/npm/docsify@4.11.3/lib/plugins/emoji.min.js"></script>
+<script src="//cdn.bootcss.com/docsify/4.11.2/plugins/search.min.js"></script>
+<script src="//cdn.bootcss.com/docsify/4.11.2/plugins/zoom-image.min.js"></script>
+<!-- <script src="//cdn.bootcss.com/docsify/4.11.2/plugins/emoji.min.js"></script> -->
+<!-- <script src="//unpkg.com/docsify-copy-code@2"></script> -->
 </body>
 </html>

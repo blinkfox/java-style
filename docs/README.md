@@ -1,4 +1,4 @@
-# 快速使用
+# 💡快速使用
 
 [Blinkfox Java 编程风格指南](guide/blinkfox-java-style-guide.md)是 Blinkfox 根据 [Google Java 编程风格](https://checkstyle.sourceforge.io/styleguides/google-java-style-20180523/javaguide.html#s3.3.3-import-ordering-and-spacing)规范并根据自身使用情况而修改出的一份 Java 编程风格指南。相对于 Google 的 Java 编程风格文档而言，修改了部分规范，增加了一些更加确定性的规则说明，这样能最大程度上的让团队的代码风格统一、易读。
 
@@ -56,9 +56,15 @@
 
 ### 1.3 开始检查代码
 
-然后在命令行中执行 `mvn clean validate` 即可，就能在控制台输出所有不符合规则的错误代码所在的文件和行、列、规则了。由于 checkstyle 检查的是源码，且 `validate` 在 Maven 命令的生命周期中是很早的一个阶段，你执行 `compile`、`test`、`install`、`deploy` 等等也都会执行该 `validate` 阶段，也就是说也都会检查代码是否符合规则。
+然后在项目的命令行中执行下面的命令即可，就能在控制台输出所有不符合规则的错误代码所在的文件和行、列、规则了。
 
-同时在做持续集成时，能便于团队成员及早的规避代码风格不统一的问题。
+```bash
+mvn clean validate
+```
+
+> **注**：由于 checkstyle 检查的是源码，且 `validate` 在 Maven 命令的生命周期中是很早的一个阶段，你执行 `compile`、`test`、`install`、`deploy` 等等也都会执行该 `validate` 阶段，也就是说也都会检查代码是否符合规则。
+
+基于 Maven 插件的方式便于做持续集成，能使团队成员及早的规避代码风格不统一的问题。
 
 ## 2 IDEA 中使用 blinkfox-checks.xml :id=idea-blinkfox-checks
 
@@ -95,3 +101,7 @@
 ### 3.2 格式化和包导入优化
 
 导入完成之后，可以在单个文件、文件夹、模块、项目的 Java 文件中，使用 `Ctrl + Alt + L` 来格式化文件，使代码更加符合规范和统一的风格。当然你还可以使用 `Ctrl + Alt + O` 来优化包的导入顺序。
+
+## 开源协议
+
+本项目基于 Apache License 2.0 协议开源。

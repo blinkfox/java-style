@@ -1,6 +1,8 @@
 # Blinkfox Java 编程风格指南
 
-这是关于 Java 编程风格相关的仓库。核心来自于 Google 的 Java 编程风格指南（[Google Java Style Guide](https://checkstyle.sourceforge.io/styleguides/google-java-style-20180523/javaguide.html#s3.3.3-import-ordering-and-spacing)，并对该份英文指南做了翻译，并最终整理出了适合我和更多人的一份规范来。
+[![HitCount](http://hits.dwyl.io/blinkfox/java-style.svg)](http://hits.dwyl.io/blinkfox/java-style) [![GitHub license](https://img.shields.io/github/license/blinkfox/java-style.svg)](https://github.com/blinkfox/java-style/blob/master/LICENSE) [![Docs Site](https://img.shields.io/badge/Docs%20Site-%E6%96%87%E6%A1%A3%E7%BD%91%E7%AB%99-orange)](https://blinkfox.github.io/java-style)
+
+> 这是关于 Java 编程风格相关的仓库。核心来自于 Google 的 Java 编程风格指南（[Google Java Style Guide](https://checkstyle.sourceforge.io/styleguides/google-java-style-20180523/javaguide.html#s3.3.3-import-ordering-and-spacing)，并对该份英文指南做了翻译，并最终整理出了适合我和更多人的一份规范来。
 
 - [查看文档 https://blinkfox.github.io/java-style](https://blinkfox.github.io/java-style)
 
@@ -25,6 +27,6 @@
 
 其中《Google Java 编程风格指南.md》和《Blinkfox Java 编程风格指南》是文档型，主要供大家阅读参考。而[《blinkfox-checks.xml》](https://github.com/blinkfox/java-style/blob/master/checks/blinkfox-checks.xml)和[《blinkfox-idea-java-style.xml》](https://github.com/blinkfox/java-style/blob/master/checks/blinkfox-idea-java-style.xml) 才是真正可实际用于工具和项目中的代码风格检查和格式化文件。
 
-## License
+## 开源协议
 
-Apache License 2.0。
+本项目基于 Apache License 2.0 协议开源。
