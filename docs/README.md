@@ -6,7 +6,7 @@
 
 下面将介绍如何在项目或 Intellij IDEA 中集成使用相关的配置检查文件格式化文件等。
 
-## 1 Maven 中集成 blinkfox-checks.xml
+## 1 Maven 中集成 blinkfox-checks.xml :id=maven-blinkfox-checks
 
 以下以 Maven 项目为例，介绍如何在 Java Maven 项目中集成使用 `blinkfox-checks.xml` 的 checkstyle 文件，你也可以查看此文件的内容，其中有详细的中文注释，你也可以对部分内容进行新增或修改，直到符合你自己或团队的代码风格要求。
 
@@ -60,7 +60,7 @@
 
 同时在做持续集成时，能便于团队成员及早的规避代码风格不统一的问题。
 
-## 2 IDEA 中使用 blinkfox-checks.xml
+## 2 IDEA 中使用 blinkfox-checks.xml :id=idea-blinkfox-checks
 
 ### 2.1 下载 CheckStyle-IDEA 插件
 
@@ -82,7 +82,7 @@
 
 ![在 IDEA 中做检查](assets/images/idea-check.png)
 
-## 3 IDEA 中使用 blinkfox-idea-java-style.xml
+## 3 IDEA 中使用 blinkfox-idea-java-style.xml :id=idea-java-style
 
 ### 3.1 导入配置文件到 IDEA 中
 
