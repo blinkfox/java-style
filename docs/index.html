@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>Java 编程风格指南</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="keywords"
+          content="Blinkfox Java 编程风格指南, Blinkfox Java Style Guide, blinkfox-checks.xml, blinkfox-idea-java-style.xml, google-checks.xml">
+    <meta name="description"
+          content="Blinkfox Java 编程风格指南, Blinkfox Java Style Guide, blinkfox-idea-java-style.xml, google-checks.xml">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico"/>
+    <link href="//cdn.bootcss.com/docsify/4.11.2/themes/vue.css" rel="stylesheet">
+</head>
+<body>
+<div id="app">加载中...</div>
+
+<script>
+    window.$docsify = {
+        name: 'Blinkfox Java Style',
+        repo: 'https://github.com/blinkfox/java-style',
+        coverpage: true,
+        loadSidebar: true,
+        loadNavbar: true,
+        maxLevel: 4,
+        subMaxLevel: 3,
+        auto2top: true,
+        mergeNavbar: true,
+        // notFoundPage: '404.md',
+        formatUpdated: '{YYYY}-{MM}-{DD} {HH}:{mm}',
+        search: {
+            // 过期时间，单位毫秒，默认一天.
+            maxAge: 86400000,
+            placeholder: '搜索...',
+            noData: '找不到结果!'
+        },
+        plugins: [
+            function (hook, vm) {
+                hook.beforeEach(function (html) {
+                    var url = 'https://github.com/blinkfox/java-style/tree/master/docs/' + vm.route.file
+                    var editHtml = '[📝 编辑文档](' + url + ')\n'
+                    return html 
+                            + '\n----\n'
+                            + editHtml
+                            + '<span style="float: right;">最后编辑于 [{docsify-updated}]</span>';
+                            
+                })
+            }
+        ]
+    }
+</script>
+<script src="//cdn.bootcss.com/docsify/4.11.2/docsify.min.js"></script>
+<script src="//cdn.bootcss.com/prism/1.19.0/components/prism-java.min.js"></script>
+<script src="//cdn.bootcss.com/docsify/4.11.2/plugins/search.min.js"></script>
+<script src="//cdn.bootcss.com/docsify/4.11.2/plugins/zoom-image.min.js"></script>
+<script src="//cdn.bootcss.com/docsify/4.11.2/plugins/emoji.min.js"></script>
+</body>
+</html>
