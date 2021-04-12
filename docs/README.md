@@ -22,14 +22,14 @@
 <plugin>
     <groupId>org.apache.maven.plugins</groupId>
     <artifactId>maven-checkstyle-plugin</artifactId>
-    <!-- 目前最新版本是 3.1.1，你也可以选用之前的版本或以后更新的版本. -->
-    <version>3.1.1</version>
+    <!-- 目前最新版本是 3.1.2，你也可以选用之前的版本或以后更新的版本. -->
+    <version>3.1.2</version>
     <dependencies>
         <dependency>
             <groupId>com.puppycrawl.tools</groupId>
             <artifactId>checkstyle</artifactId>
-            <!-- 由于 blinkfox-checks.xml 的版本是 8.30 的，我们指定使用该版本的 checkstyle 进行检查. -->
-            <version>8.30</version>
+            <!-- 由于 blinkfox-checks.xml 的版本是 8.41 的，我们指定使用该版本的 checkstyle 进行检查. -->
+            <version>8.41.1</version>
         </dependency>
     </dependencies>
     <configuration>
