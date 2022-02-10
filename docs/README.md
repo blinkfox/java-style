@@ -28,8 +28,8 @@
         <dependency>
             <groupId>com.puppycrawl.tools</groupId>
             <artifactId>checkstyle</artifactId>
-            <!-- 由于 blinkfox-checks.xml 的版本是 8.41 的，我们指定使用该版本的 checkstyle 进行检查. -->
-            <version>8.41.1</version>
+            <!-- 由于目前 blinkfox-checks.xml 的版本是 9.3 的，我们指定使用该版本的 checkstyle 进行检查. -->
+            <version>9.3</version>
         </dependency>
     </dependencies>
     <configuration>
